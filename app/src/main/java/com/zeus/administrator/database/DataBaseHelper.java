@@ -25,7 +25,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     private final int BUFFER_SIZE = 400000;
 
-    public static final String PACKAGE_NAME = "com.athena.administrator.athena";//包名
+    public static final String PACKAGE_NAME = "com.zeus.administrator.zeus";//包名
     public static final String DB_PATH = "/data"
             + Environment.getDataDirectory().getAbsolutePath() + "/"
             + PACKAGE_NAME+"/databases"; //在手机里存放数据库的位置
