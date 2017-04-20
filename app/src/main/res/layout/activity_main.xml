@@ -5,5 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zeus.administrator.zeus.MainActivity">
+    <TextView
+        android:id="@+id/welcome"
+        android:text="@string/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/welcome" />
 </android.support.constraint.ConstraintLayout>

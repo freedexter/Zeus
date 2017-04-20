@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Zeus</string>
+    <string name="welcome">欢迎你：</string>
 </resources>

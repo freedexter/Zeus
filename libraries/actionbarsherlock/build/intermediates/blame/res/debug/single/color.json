@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "D:\\Android\\StudioProjects\\Zeus\\libraries\\actionbarsherlock\\build\\intermediates\\res\\merged\\debug\\color\\abs__primary_text_disable_only_holo_dark.xml",
+        "source": "D:\\Android\\StudioProjects\\Zeus\\libraries\\actionbarsherlock\\res\\color\\abs__primary_text_disable_only_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\Athena\\libraries\\actionbarsherlock\\build\\intermediates\\res\\merged\\debug\\color\\abs__primary_text_disable_only_holo_dark.xml",
+        "source": "D:\\Android\\StudioProjects\\Athena\\libraries\\actionbarsherlock\\res\\color\\abs__primary_text_disable_only_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\Athena\\libraries\\actionbarsherlock\\build\\intermediates\\res\\merged\\debug\\color\\abs__primary_text_holo_light.xml",
+        "source": "D:\\Android\\StudioProjects\\Athena\\libraries\\actionbarsherlock\\res\\color\\abs__primary_text_holo_light.xml"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\Zeus\\libraries\\actionbarsherlock\\build\\intermediates\\res\\merged\\debug\\color\\abs__primary_text_disable_only_holo_light.xml",
+        "source": "D:\\Android\\StudioProjects\\Zeus\\libraries\\actionbarsherlock\\res\\color\\abs__primary_text_disable_only_holo_light.xml"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\Zeus\\libraries\\actionbarsherlock\\build\\intermediates\\res\\merged\\debug\\color\\abs__primary_text_holo_light.xml",
+        "source": "D:\\Android\\StudioProjects\\Zeus\\libraries\\actionbarsherlock\\res\\color\\abs__primary_text_holo_light.xml"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\Zeus\\libraries\\actionbarsherlock\\build\\intermediates\\res\\merged\\debug\\color\\abs__primary_text_holo_dark.xml",
+        "source": "D:\\Android\\StudioProjects\\Zeus\\libraries\\actionbarsherlock\\res\\color\\abs__primary_text_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\Athena\\libraries\\actionbarsherlock\\build\\intermediates\\res\\merged\\debug\\color\\abs__primary_text_holo_dark.xml",
+        "source": "D:\\Android\\StudioProjects\\Athena\\libraries\\actionbarsherlock\\res\\color\\abs__primary_text_holo_dark.xml"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\Athena\\libraries\\actionbarsherlock\\build\\intermediates\\res\\merged\\debug\\color\\abs__primary_text_disable_only_holo_light.xml",
+        "source": "D:\\Android\\StudioProjects\\Athena\\libraries\\actionbarsherlock\\res\\color\\abs__primary_text_disable_only_holo_light.xml"
+    }
+]
