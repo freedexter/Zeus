@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Zeus</string>
-    <string name="welcome">欢迎你：</string>
+    <string name="welcome">你好：</string>
+    <string-array name="main_menu">
+        <item>练习</item>
+        <item>测验</item>
+    </string-array>
+    <string name="action_settings">退出</string>
 </resources>
