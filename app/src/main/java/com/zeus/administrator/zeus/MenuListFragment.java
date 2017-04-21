@@ -34,7 +34,7 @@ public class MenuListFragment extends ListFragment {
         SampleAdapter adapter = new SampleAdapter(getActivity());
         String strs[] = getResources().getStringArray(R.array.main_menu);
         for (int i = 0; i < 2; i++) {
-            adapter.add(new SampleItem( strs[i], R.drawable.ic_launcher));
+            adapter.add(new SampleItem( strs[i], R.drawable.menu_icon));
         }
         setListAdapter(adapter);
     }
