@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.zeus.administrator.zeus.R;
 import com.zeus.administrator.database.LoginDataBaseAdapter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,19 +28,26 @@ public class QueryDataBaseAdapter {
 
     public QueryDataBaseAdapter(Context context){
         dbHelper=DataBaseHelper.getDataBaseHelper(context);
+        try {
+            dbHelper.createDataBase();
+        }catch (IOException e){
+            throw new Error("Unable to create database");
+        }
+        try {
+            sdb = dbHelper.openDataBase();
+        }catch( IOException e){
+            throw new Error("Unable to open database");
+        }
     }
 
-    public ArrayList<HashMap<String, Object>>  getToolDtlData( String username   ){
-        sdb = dbHelper.getReadableDatabase();
-        String sql;
-        stat = getStat(username);
-     Log.v("tag", stat);
-        if ( stat.substring( 0,1).equals("0") ){
-            sql="select * from  tool_dtl order by trandate desc";
-        }else{
-            sql="select * from  tool_dtl  where user=\'"+username+"\' order by trandate desc";
+    public ArrayList<HashMap<String, Object>>  getExamDtlData( String username   ){
+        if( !sdb.isOpen() ){
+            sdb=dbHelper.getWritableDatabase();
         }
-      Log.v("tag",sql);
+        String sql;
+        sql="select * from  user_exam_dtl  where username=\'"+username+"\' order by trantime desc";
+
+        Log.v("tag",sql);
         Cursor c = sdb.rawQuery( sql,null);
 
         int count = c.getCount();
@@ -48,9 +57,11 @@ public class QueryDataBaseAdapter {
         HashMap<String, Object> map = new HashMap<String, Object>();
         if( count == 0 ){
           //  map.put("img", R.drawable.shop);
-            map.put("toolname", "您名下没有任何商品!");
-            map.put("sourcefrom", "******");
-            map.put("singlesum", "");
+            map.put("trantime", "您还没有测试过呢,快来试试吧!");
+            map.put("level", "");
+            map.put("score", "");
+            map.put("stars", "");
+            map.put("using_time", "");
             listData.add(map);
         }else {
             // 获取表的内容
@@ -58,10 +69,11 @@ public class QueryDataBaseAdapter {
             while ( c.moveToNext()) {
                 map = new HashMap<String, Object>();
               //  map.put("img", R.drawable.shop);
-                map.put("toolname", c.getString(1));
-                map.put("sourcefrom", c.getString(0) ) ;
-                map.put("trandate", c.getString(2) ) ;
-                map.put("singlesum", c.getString(13) );
+                map.put("trantime", c.getString(1));
+                map.put("level", c.getString(2) ) ;
+                map.put("score", c.getString(3) ) ;
+                map.put("stars", c.getString(4) );
+                map.put("using_time", c.getString(5) );
                // map.put("button_detail", R.drawable.align_right);
                 listData.add(map);
             }
@@ -71,95 +83,15 @@ public class QueryDataBaseAdapter {
         return listData;
     }
 
-    public ArrayList<HashMap<String, Object>>  getToolDtlDtl( String username, String toolname, String sourcefrom, String trandate   ){
-        sdb = dbHelper.getReadableDatabase();
+
+    public ArrayList<HashMap<String, Object>>  getWordDict( String level  ){
+        if( !sdb.isOpen() ){
+            sdb=dbHelper.getWritableDatabase();
+        }
         String sql;
-        stat = getStat(username);
         //   Log.v("tag", username + stat);
-        if ( stat.substring( 0,1).equals("0") ) {
-            sql = "select * from  tool_dtl  where toolname = '" + toolname + "' and sourcefrom = '" + sourcefrom +
-                    "' and trandate = '" + trandate +"'";
-        }else {
-            sql = "select * from  tool_dtl  where toolname = '" + toolname + "' and sourcefrom = '" + sourcefrom +
-                    "' and trandate = '" + trandate +
-                    "' and user='" + username + "'";
-        }
+        sql = "select * from  word_dict  where level = '" + level + "'";
 
-       // Log.v("tag",sql);
-        Cursor cursor = sdb.rawQuery( sql,null);
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        listData = new ArrayList<HashMap<String, Object>>();
-        if(cursor.moveToFirst()==true){
-            map = new HashMap<String, Object>();
-            map.put("currency", cursor.getString(3));
-            map.put("number", cursor.getInt(4) ) ;
-            map.put("soldnumber", cursor.getInt(5) ) ;
-            map.put("totprice", cursor.getDouble(6) );
-            map.put("feepercent", cursor.getInt(7) );
-            map.put("feeprice", cursor.getDouble(8));
-            map.put("exchangerate", cursor.getDouble(9) );
-            map.put("rmb_totprice", cursor.getDouble(10) );
-            map.put("rmb_singprice", cursor.getDouble(11) );
-            map.put("transprice", cursor.getDouble(12) );
-            map.put("singlesum", cursor.getDouble(13) );
-            map.put("weight", cursor.getInt(14) );
-            map.put("totweight", cursor.getInt(15) );
-            map.put("beizhu", cursor.getString(16) );
-            map.put("user", cursor.getString(17) );
-            listData.add(map);
-        }
-        cursor.close();
-        sdb.close();
-        return listData;
-    }
-
-
-
-    public ArrayList<HashMap<String, Object>>  getToolOrder( String username,String customer,String orderdate  ){
-        sdb = dbHelper.getReadableDatabase();
-        String sql;
-        stat = getStat(username);
-        //   Log.v("tag", username + stat);
-        if ( stat.substring( 0,1).equals("0") ) {
-            sql = "select * from  tool_order  where customer = '" + customer + "' and orderdate = '" + orderdate +"'" ;
-        }else {
-            sql = "select * from  tool_order  where customer = '" + customer + "' and orderdate = '" + orderdate +
-                    "' and user='" + username + "'";
-        }
-
-        // Log.v("tag",sql);
-        Cursor cursor = sdb.rawQuery( sql,null);
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        listData = new ArrayList<HashMap<String, Object>>();
-        while ( cursor.moveToNext()) {
-            map = new HashMap<String, Object>();
-            map.put("toolsource", cursor.getString(2));
-            map.put("toolname", cursor.getString(3));
-            map.put("trandate", cursor.getString(4));
-            map.put("number", cursor.getInt(5) ) ;
-            map.put("toolprice", cursor.getDouble(6) ) ;
-            map.put("exchangerate", cursor.getDouble(7) );
-            map.put("toolbuyprice", cursor.getDouble(8) );
-            map.put("toolflag", cursor.getString(9));
-            map.put("user", cursor.getString(10) );
-            listData.add(map);
-        }
-        cursor.close();
-        sdb.close();
-        return listData;
-    }
-
-    public ArrayList<HashMap<String, Object>>  getToolOrderSum( String username,String customer,String orderdate  ){
-        sdb = dbHelper.getReadableDatabase();
-        String sql;
-        stat = getStat(username);
-        //   Log.v("tag", username + stat);
-        if ( stat.substring( 0,1).equals("0") ) {
-            sql = "select sum(number) as totnum, sum(toolbuyprice) as totprice from  tool_order  where customer = '" + customer + "' and orderdate = '" + orderdate +"'" ;
-        }else {
-            sql = "select sum(number) as totnum, sum(toolbuyprice) as totprice from  tool_order  where customer = '" + customer + "' and orderdate = '" + orderdate +
-                    "' and user='" + username + "'";
-        }
 
         // Log.v("tag",sql);
         Cursor cursor = sdb.rawQuery( sql,null);
@@ -167,83 +99,15 @@ public class QueryDataBaseAdapter {
         listData = new ArrayList<HashMap<String, Object>>();
         if(cursor.moveToFirst()==true){
             map = new HashMap<String, Object>();
-            map.put("totnum", cursor.getInt(0));
-            map.put("totprice", cursor.getDouble(1));
+            map.put("word", cursor.getString(0));
+            map.put("grammar", cursor.getString(1) ) ;
             listData.add(map);
         }
         cursor.close();
         sdb.close();
         return listData;
     }
-
-    public ArrayList<HashMap<String, Object>>  getToolOrderDtl( String username,String customer,String orderdate,String toolsource,String toolname  ){
-        sdb = dbHelper.getReadableDatabase();
-        String sql;
-        stat = getStat(username);
-        //   Log.v("tag", username + stat);
-        if ( stat.substring( 0,1).equals("0") ) {
-            sql = "select * from  tool_order  where customer = '" + customer + "' and orderdate = '" + orderdate +
-                    "' and toolsource = '" + toolsource +"' and toolname = '" + toolname +"'" ;
-        }else {
-            sql = "select * from  tool_order  where customer = '" + customer + "' and orderdate = '" + orderdate +
-                    "' and toolsource = '" + toolsource +"' and toolname = '" + toolname +
-                    "' and user='" + username + "'";
-        }
-
-        // Log.v("tag",sql);
-        Cursor cursor = sdb.rawQuery( sql,null);
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        listData = new ArrayList<HashMap<String, Object>>();
-        if(cursor.moveToFirst()==true){
-            map = new HashMap<String, Object>();
-            map.put("trandate", cursor.getString(4));
-            map.put("number", cursor.getInt(5) ) ;
-            map.put("toolprice", cursor.getDouble(6) ) ;
-            map.put("exchangerate", cursor.getDouble(7) );
-            map.put("toolbuyprice", cursor.getDouble(8) );
-            map.put("toolflag", cursor.getString(9));
-            map.put("user", cursor.getString(10) );
-            listData.add(map);
-        }
-        cursor.close();
-        sdb.close();
-        return listData;
-    }
-
-    public ArrayList<HashMap<String, Object>>  getCustomOrderDtl( String username,String customer,String orderdate  ){
-        sdb = dbHelper.getReadableDatabase();
-        String sql;
-        stat = getStat(username);
-        //   Log.v("tag", username + stat);
-        if ( stat.substring( 0,1).equals("0") ) {
-            sql = "select * from  custom_order  where customer = '" + customer + "' and orderdate = '" + orderdate +"'" ;
-        }else {
-            sql = "select * from  custom_order  where customer = '" + customer + "' and orderdate = '" + orderdate +
-                    "' and user='" + username + "'";
-        }
-
-        // Log.v("tag",sql);
-        Cursor cursor = sdb.rawQuery( sql,null);
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        listData = new ArrayList<HashMap<String, Object>>();
-        if(cursor.moveToFirst()==true){
-            map = new HashMap<String, Object>();
-            map.put("number", cursor.getString(2));
-            map.put("totprice", cursor.getInt(3) ) ;
-            map.put("needprice", cursor.getDouble(4) ) ;
-            map.put("realprice", cursor.getDouble(5) );
-            map.put("paychnl", cursor.getString(6) );
-            map.put("exprprice", cursor.getDouble(7));
-            map.put("exprnum", cursor.getString(8));
-            map.put("exprdate", cursor.getString(9));
-            map.put("user", cursor.getString(10) );
-            listData.add(map);
-        }
-        cursor.close();
-        sdb.close();
-        return listData;
-    }
-
+/*
     public boolean insertCustomOrder(String username, ArrayList<HashMap<String, Object>> listData ){
         boolean ret = true;
         String customer,orderdate,stat;
@@ -458,11 +322,6 @@ public class QueryDataBaseAdapter {
         arrayOfObject[15]=username;
 
 
-      /*  sql = "update tool_dtl set number="+number+",totprice="+totprice +",feepercent="+feepercent+
-                      ",feeprice="+feeprice +",exchangerate="+exchangerate+",rmb_totprice="+rmb_totprice+
-                       ",rmb_singprice="+rmb_singprice+",transprice="+transprice+",singlesum="+singlesum+
-                       ",weight="+weight+",totweight="+totweight+",beizhu='"+beizhu+"' " +
-                "where sourcefrom = '"+sourcefrom+"' and  toolname = '"+toolname+"' and trandate = '"+trandate+"' and user = '"+username+"' ";*/
         sql = "update tool_dtl set number=?,totprice=?,feepercent=?,feeprice=?,exchangerate=?,rmb_totprice=?,rmb_singprice=?,transprice=?,singlesum=?,weight=?,totweight=?,beizhu=? "+
                 "where sourcefrom = ? and  toolname = ? and trandate = ? and user = ? ";
         Log.v("tag", sql);
@@ -1100,20 +959,10 @@ public class QueryDataBaseAdapter {
         Log.v("tag", sql);
         sdb.execSQL(sql, arrayOfObject);
 
-
-
-
-    /*    restnum = soldnum - number;
-        if( restnum < 0 ){
-            restnum = 0;
-        }
-        Log.v("tag", "restnum=" + restnum.toString());
-
-        upRestNumToolDtl(username, toolname, sourcefrom, trandate, restnum);*/
         sdb.close();
 
         // Log.v("tag", sql);
         return true;
-    }
+    }*/
 
 }

@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">Zeus</string>
+    <string name="app_name">碰词</string>
     <string name="welcome">你好：</string>
     <string-array name="main_menu">
         <item>练习</item>
         <item>测验</item>
     </string-array>
     <string name="action_settings">退出</string>
+    <string name="title">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;测验时间&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;|&#160;&#160;&#160;&#160;得分&#160;&#160;&#160;&#160;|&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;用时&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;|</string>
 </resources>
