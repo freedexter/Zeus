@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -212,34 +213,75 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
-            //观察convertView随ListView滚动情况
-            if (convertView == null) {
-                convertView = mInflater.inflate( R.layout.vlist ,null);
-                holder = new ViewHolder();
-                /**得到各个控件的对象*/
-                //holder.img = (ImageView) convertView.findViewById(R.id.img);
-                holder.trantime = (TextView) convertView.findViewById(R.id.trantime);
-                holder.score = (TextView) convertView.findViewById(R.id.score);
-                holder.using_time = (TextView) convertView.findViewById(R.id.using_time);
-                holder.stars = (ImageButton) convertView.findViewById(R.id.stars);
-                convertView.setTag(holder);//绑定ViewHolder对象
-            }
-            else{
-                holder = (ViewHolder)convertView.getTag();//取出ViewHolder对象
-            }
-            /**设置TextView显示的内容，即我们存放在动态数组中的数据*/
-            holder.trantime.setText(listData.get(position).get("trantime").toString());
-            holder.score.setText(listData.get(position).get("score").toString());
-            holder.using_time.setText(listData.get(position).get("using_time").toString());
-      /*      if( !listData.get(position).get("sourcefrom").toString().equals("******")) {
-                holder.button_detail.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showInfo(position, listData);
-                    }
-                });
-            }*/
+            String time,ctime;
+            String clevel;
+            String stars;
 
+            clevel = listData.get(position).get("level").toString().trim();
+            stars = listData.get(position).get("stars").toString().trim();
+            if( clevel.equals("!@#$") == true){
+                //观察convertView随ListView滚动情况
+                if (convertView == null) {
+                    convertView = mInflater.inflate(R.layout.mlist, null);
+                    holder = new ViewHolder();
+                    /**得到各个控件的对象*/
+                    //holder.img = (ImageView) convertView.findViewById(R.id.img);
+                    holder.noexam = (TextView) convertView.findViewById(R.id.noexam);
+                    convertView.setTag(holder);//绑定ViewHolder对象
+                } else {
+                    holder = (ViewHolder) convertView.getTag();//取出ViewHolder对象
+                }
+                /**设置TextView显示的内容，即我们存放在动态数组中的数据*/
+                holder.noexam.setText(listData.get(position).get("trantime").toString());
+            }else {
+                //观察convertView随ListView滚动情况
+
+                if (convertView == null) {
+                    convertView = mInflater.inflate(R.layout.vlist, null);
+                    holder = new ViewHolder();
+                    /**得到各个控件的对象*/
+                    //holder.img = (ImageView) convertView.findViewById(R.id.img);
+                    holder.trantime = (TextView) convertView.findViewById(R.id.trantime);
+                    holder.score = (TextView) convertView.findViewById(R.id.score);
+                    holder.using_time = (TextView) convertView.findViewById(R.id.using_time);
+                    holder.stars = (ImageView) convertView.findViewById(R.id.stars);
+                    switch (stars){
+                        case "1":
+                            holder.stars.setImageDrawable(getResources().getDrawable(R.drawable.redstars1));
+                            break;
+                        case "2":
+                            holder.stars.setImageDrawable(getResources().getDrawable(R.drawable.redstars2));
+                            break;
+                        case "3":
+                            holder.stars.setImageDrawable(getResources().getDrawable(R.drawable.redstars3));
+                            break;
+                        case "4":
+                            holder.stars.setImageDrawable(getResources().getDrawable(R.drawable.redstars4));
+                            break;
+                        case "5":
+                            holder.stars.setImageDrawable(getResources().getDrawable(R.drawable.redstars5));
+                            break;
+                        default:
+                            holder.stars.setImageDrawable(getResources().getDrawable(R.drawable.redstars5));
+                            break;
+                    }
+                    ViewGroup.LayoutParams params = holder.stars.getLayoutParams();
+                    params.height=32;
+                    params.width =160;
+                    holder.stars.setLayoutParams(params);
+
+                    convertView.setTag(holder);//绑定ViewHolder对象
+                } else {
+                    holder = (ViewHolder) convertView.getTag();//取出ViewHolder对象
+                }
+                /**设置TextView显示的内容，即我们存放在动态数组中的数据*/
+                time = listData.get(position).get("trantime").toString();
+                ctime = time.substring(2, 4) + "月" + time.substring(4, 6) + "日 " + time.substring(6, 8) + ":" + time.substring(8, 10)+":"+time.substring(10, 12);
+                holder.trantime.setText(ctime);
+                holder.score.setText(listData.get(position).get("score").toString() + "分");
+                holder.using_time.setText(listData.get(position).get("using_time").toString());
+
+            }
             return convertView;
         }
 
@@ -250,7 +292,8 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
         public TextView trantime;
         public TextView score;
         public TextView using_time;
-        public ImageButton stars;
+        public ImageView stars;
+        public TextView noexam;
     }
     class GetItemDateTask extends AsyncTask< String ,  Integer,  ArrayList<HashMap<String, Object>>> {//获取图片仍采用AsyncTask，这里的优化放到下篇再讨论
 

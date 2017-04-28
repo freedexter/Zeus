@@ -57,8 +57,8 @@ public class QueryDataBaseAdapter {
         HashMap<String, Object> map = new HashMap<String, Object>();
         if( count == 0 ){
           //  map.put("img", R.drawable.shop);
-            map.put("trantime", "您还没有测试过呢,快来试试吧!");
-            map.put("level", "");
+            map.put("trantime", "您还没有测验过呢,快来试试吧!");
+            map.put("level", "!@#$");
             map.put("score", "");
             map.put("stars", "");
             map.put("using_time", "");

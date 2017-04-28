@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/trantime"
-        android:layout_width="120dp"
+        android:layout_width="134dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="#2c90c9" />
+
     <TextView
         android:id="@+id/decli1"
-        android:layout_width="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="|"
         android:textColor="#2c90c9" />
     <TextView
         android:id="@+id/score"
-        android:layout_width="50dp"
+        android:layout_width="54dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="#2c90c9" />
     <TextView
         android:id="@+id/decli2"
-        android:layout_width="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="|"
         android:textColor="#2c90c9" />
@@ -35,15 +37,23 @@
         android:textColor="#2c90c9" />
     <TextView
         android:id="@+id/decli3"
-        android:layout_width="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="|"
         android:textColor="#2c90c9" />
-    <ImageButton
-        android:id="@+id/stars"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
-        android:background="@drawable/shop"
-        android:layout_marginRight="5px" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/stars"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="17dp"/>
+
+    </RelativeLayout>
+
 </LinearLayout>
