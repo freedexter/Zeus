@@ -21,23 +21,44 @@
         android:layout_toRightOf="@+id/welcome" />
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:text="@string/title"
-        android:layout_marginTop="14dp"
-        android:layout_below="@+id/welcome"
-        android:layout_alignLeft="@+id/listView"
-        android:layout_alignStart="@+id/listView"
-        android:layout_alignRight="@+id/listView"
-        android:layout_alignEnd="@+id/listView"
-        android:textColor="#2c90c9" />
+        android:textColor="#2c90c9"
+        android:textSize="18dp"
+        android:layout_alignTop="@+id/username"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="9dp"
+        android:layout_marginEnd="9dp" />
 
     <ListView
         android:id="@+id/listView"
-        android:layout_width="400dp"
+        android:layout_width="450dp"
         android:layout_height="match_parent"
+        android:layout_below="@+id/title"
+        android:layout_alignLeft="@+id/title"
+        android:layout_alignStart="@+id/title"
+        android:layout_marginTop="17dp"
+        android:layout_alignRight="@+id/title"
+        android:layout_alignEnd="@+id/title" />
+
+    <ImageButton
+        android:id="@+id/imagetest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/test"
+        android:layout_below="@+id/welcome"
         android:layout_alignLeft="@+id/welcome"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/welcome"
-        android:layout_below="@+id/title" />
+        android:layout_alignStart="@+id/welcome" />
+
+    <ImageButton
+        android:id="@+id/imageexam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/exam"
+        android:layout_below="@+id/imagetest"
+        android:layout_alignLeft="@+id/imagetest"
+        android:layout_alignStart="@+id/imagetest" />
+
 </RelativeLayout>
