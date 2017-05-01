@@ -30,11 +30,21 @@ public class MenuListFragment extends ListFragment {
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
+        String username;
         super.onActivityCreated(savedInstanceState);
         SampleAdapter adapter = new SampleAdapter(getActivity());
-        String strs[] = getResources().getStringArray(R.array.main_menu);
-        for (int i = 0; i < 2; i++) {
-            adapter.add(new SampleItem( strs[i], R.drawable.menu_icon));
+        TextView user = (TextView) getActivity().findViewById(R.id.username);
+        username = user.getText().toString();
+        if( username.equals("admin") != true ) {
+            String strs[] = getResources().getStringArray(R.array.main_menu);
+            for (int i = 0; i < 2; i++) {
+                adapter.add(new SampleItem(strs[i], R.drawable.menu_icon));
+            }
+        }else{
+            String strs[] = getResources().getStringArray(R.array.main_menu_set);
+            for (int i = 0; i < 3; i++) {
+                adapter.add(new SampleItem(strs[i], R.drawable.menu_icon));
+            }
         }
         setListAdapter(adapter);
     }

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
     private TextView editName=null;
     private String username;
     private ListView listView;
+    ImageButton testbutton,exambutton;
     MyAdapter mAdapter;
     GetItemDateTask dTask=null;
     ArrayList<HashMap<String, Object>> listData=null;
@@ -45,7 +46,35 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
         initSlidingMenu();
         initExtras();
         initListview();
+        buttonSet();
+    }
+    private void buttonSet(){
+        final Intent intent = new Intent();
+        final Bundle b = new Bundle();
+        b.putString("username", username);
 
+
+        testbutton = (ImageButton) findViewById(R.id.imagetest);
+        exambutton = (ImageButton) findViewById(R.id.imageexam);
+
+        testbutton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getApplicationContext(), TestActivity.class);
+                intent.putExtras(b);
+                startActivityForResult(intent, 0);
+            }
+        });
+        exambutton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getApplicationContext(), ExamActivity.class);
+                intent.putExtras(b);
+                startActivityForResult(intent, 0);
+            }
+        });
     }
 
     private void initSlidingMenu() {
@@ -89,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
 
         listView= (ListView) findViewById(R.id.listView);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
-        getSupportActionBar().setHomeButtonEnabled(true);//actionbar��������Ա����
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//��ʾ�����ͼ��
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        View customView = LayoutInflater.from(this).inflate(R.layout.actionbar_layout, new LinearLayout(this), false);
         //getSupportActionBar().setCustomView(LayoutInflater.from(this).inflate(R.layout.actionbar_layout, new LinearLayout(this), false) );
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -151,6 +180,9 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
                 break;
             case 1:
                 intent.setClass(getApplicationContext(), ExamActivity.class);
+                break;
+            case 2:
+                intent.setClass(getApplicationContext(), SetupActivity.class);
                 break;
         }
         intent.putExtras(b);

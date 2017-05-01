@@ -21,9 +21,13 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".TestActivity"  android:screenOrientation="landscape"/>
-        <activity android:name=".ExamActivity"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".TestActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ExamActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".SetupActivity"></activity>
     </application>
 
 </manifest>

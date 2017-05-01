@@ -36,7 +36,7 @@
 
     <TextView
         android:id="@+id/score"
-        android:layout_width="72dp"
+        android:layout_width="71dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="#2c90c9"

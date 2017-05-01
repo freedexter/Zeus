@@ -81,7 +81,7 @@ public class LoginDataBaseAdapter{
         return username;
     }
     public String remberUser(String username){
-        String sql,string1;
+        String sql,string1,string2;
         String stat=null;
         //Object[] arrayOfObject = new Object[2];
         Cursor cursor;
@@ -103,7 +103,9 @@ public class LoginDataBaseAdapter{
         sdb.beginTransaction();
         sql="update user set stat='"+string1+"' where username ='"+username+"'";
         sdb.execSQL(sql);
-
+        string2 = stat.substring( 0,1) + "0";
+        sql="update user set stat='"+string2+"' where username <>'"+username+"'";
+        sdb.execSQL(sql);
         sdb.setTransactionSuccessful();
         cursor.close();
         sdb.endTransaction();
