@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
 
             @Override
             public void onClick(View v) {
+
                 final String[] items = getResources().getStringArray( R.array.style );
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("请选择词语的难易程度：")
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
                                                 int which) {
                                 final String item;
                                 item = items[which];
+                                final String level = (which+1)+"";
                                 new AlertDialog.Builder( MainActivity.this)
                                         .setTitle("你选择了: \"" + item +"模式\"")
                                         .setMessage("练习马上开始，请做好准备唷！")
@@ -83,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
                                                             DialogInterface dialog,
                                                             int which) {
                                                         // 这里是你点击确定之后可以进行的操作
-                                                        b.putString("style", item);
+                                                        b.putString("level", level );
+                                                     //   Log.v("tag","level: "+ level);
                                                         intent.setClass(getApplicationContext(), TestActivity.class);
                                                         intent.putExtras(b);
                                                         startActivityForResult(intent, 0);
@@ -117,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
                                                 int which) {
                                 final String item;
                                 item = items[which];
+                                final String level=(which+1)+"";
                                 new AlertDialog.Builder( MainActivity.this)
                                         .setTitle("你选择了: \"" + item+"模式\"")
                                         .setMessage("测验马上开始，请做好准备唷！")
@@ -128,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
                                                             DialogInterface dialog,
                                                             int which) {
                                                         // 这里是你点击确定之后可以进行的操作
-                                                        b.putString("style", item);
+                                                        b.putString("level", level);
                                                         intent.setClass(getApplicationContext(), ExamActivity.class);
                                                         intent.putExtras(b);
                                                         startActivityForResult(intent, 0);
@@ -245,22 +249,102 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
 
     public void onArticleSelected(int position) {
         // 用户选择了HeadlinesFragment中的头标题后
-        Intent intent=new Intent();;
-        Bundle b = new Bundle();
+        final Intent intent=new Intent();;
+        final Bundle b = new Bundle();
         b.putString("username", username);
+        final String[] sitems = getResources().getStringArray( R.array.style );
         switch(position) {
             case 0:
-                intent.setClass(getApplicationContext(), TestActivity.class);
+
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("请选择词语的难易程度：")
+                        .setItems(sitems, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                final String item;
+                                item = sitems[which];
+                                final String level = (which + 1)+"";
+                                new AlertDialog.Builder( MainActivity.this)
+                                        .setTitle("你选择了: \"" + item +"模式\"")
+                                        .setMessage("练习马上开始，请做好准备唷！")
+                                        .setPositiveButton(
+                                                "确定",
+                                                new DialogInterface.OnClickListener() {
+
+                                                    public void onClick(
+                                                            DialogInterface dialog,
+                                                            int which) {
+                                                        // 这里是你点击确定之后可以进行的操作
+                                                        b.putString("level", level);
+                                                        intent.setClass(getApplicationContext(), TestActivity.class);
+                                                        intent.putExtras(b);
+                                                        startActivityForResult(intent, 0);
+                                                    }
+                                                })
+                                        .setNegativeButton(
+                                                "取消",
+                                                new DialogInterface.OnClickListener() {
+
+                                                    public void onClick(
+                                                            DialogInterface dialog,
+                                                            int which) {
+                                                        // 这里点击取消之后可以进行的操作
+                                                    }
+                                                }).show();
+                            }
+                        }).show();
                 break;
             case 1:
-                intent.setClass(getApplicationContext(), ExamActivity.class);
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("请选择难易程度：")
+                        .setItems(sitems, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                final String item;
+                                item = sitems[which];
+                                final String level = (which +1)+"";
+                                new AlertDialog.Builder( MainActivity.this)
+                                        .setTitle("你选择了: \"" + item+"模式\"")
+                                        .setMessage("测验马上开始，请做好准备唷！")
+                                        .setPositiveButton(
+                                                "确定",
+                                                new DialogInterface.OnClickListener() {
+
+                                                    public void onClick(
+                                                            DialogInterface dialog,
+                                                            int which) {
+                                                        // 这里是你点击确定之后可以进行的操作
+                                                        b.putString("level", level);
+
+                                                        intent.setClass(getApplicationContext(), ExamActivity.class);
+                                                        intent.putExtras(b);
+                                                        startActivityForResult(intent, 0);
+                                                    }
+                                                })
+                                        .setNegativeButton(
+                                                "取消",
+                                                new DialogInterface.OnClickListener() {
+
+                                                    public void onClick(
+                                                            DialogInterface dialog,
+                                                            int which) {
+                                                        // 这里点击取消之后可以进行的操作
+                                                    }
+                                                }).show();
+                            }
+                        }).show();
+
                 break;
             case 2:
                 intent.setClass(getApplicationContext(), SetupActivity.class);
+                intent.putExtras(b);
+                startActivityForResult(intent, 0);
                 break;
         }
-        intent.putExtras(b);
-        startActivityForResult(intent, 0);
+     //   intent.putExtras(b);
+     //   startActivityForResult(intent, 0);
         menu.showContent();
     }
     public void initListview(){

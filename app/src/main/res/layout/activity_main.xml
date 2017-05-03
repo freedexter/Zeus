@@ -11,20 +11,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:layout_marginLeft="15dp"
+        android:textColor="#3F51B5"/>
 
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/welcome"
-        android:layout_toRightOf="@+id/welcome" />
+        android:layout_toRightOf="@+id/welcome"
+        android:textColor="#2c90c9"/>
     <TextView
         android:id="@+id/title"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:text="@string/title"
-        android:textColor="#2c90c9"
+        android:textColor="#3F51B5"
         android:textSize="18dp"
         android:layout_alignTop="@+id/username"
         android:layout_alignParentRight="true"

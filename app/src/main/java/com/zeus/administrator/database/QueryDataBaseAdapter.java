@@ -84,14 +84,13 @@ public class QueryDataBaseAdapter {
     }
 
 
-    public ArrayList<HashMap<String, Object>>  getWordDict( String level  ){
+    public ArrayList<HashMap<String, Object>>  getWordDict( String level,String count  ){
         if( !sdb.isOpen() ){
             sdb=dbHelper.getWritableDatabase();
         }
         String sql;
         //   Log.v("tag", username + stat);
-        sql = "select * from  word_dict  where level = '" + level + "'";
-
+        sql = "select * from  word_dict  where level = '" + level + "' ORDER BY RANDOM() LIMIT "+ count;
 
         // Log.v("tag",sql);
         Cursor cursor = sdb.rawQuery( sql,null);
@@ -106,6 +105,44 @@ public class QueryDataBaseAdapter {
         cursor.close();
         sdb.close();
         return listData;
+    }
+
+
+    public String getCountSettings( ){
+        String count="";
+        if( !sdb.isOpen() ){
+            sdb=dbHelper.getWritableDatabase();
+        }
+        String sql;
+        //   Log.v("tag", username + stat);
+        sql = "select  * from  system_setting " ;
+
+        // Log.v("tag",sql);
+        Cursor cursor = sdb.rawQuery( sql,null);
+        if(cursor.moveToFirst()==true){
+            count = cursor.getString(1).trim();
+        }
+        cursor.close();
+        sdb.close();
+        return count;
+    }
+    public String getLimtTimeSettings( ){
+        String time="";
+        if( !sdb.isOpen() ){
+            sdb=dbHelper.getWritableDatabase();
+        }
+        String sql;
+        //   Log.v("tag", username + stat);
+        sql = "select  * from  system_setting " ;
+
+        // Log.v("tag",sql);
+        Cursor cursor = sdb.rawQuery( sql,null);
+        if(cursor.moveToFirst()==true){
+            time = cursor.getString(0).trim();
+        }
+        cursor.close();
+        sdb.close();
+        return time;
     }
 /*
     public boolean insertCustomOrder(String username, ArrayList<HashMap<String, Object>> listData ){
