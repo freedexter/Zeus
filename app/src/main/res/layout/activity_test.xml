@@ -21,18 +21,18 @@
 
     <TextView
         android:id="@+id/words1"
-        android:layout_width="wrap_content"
+        android:layout_width="90sp"
         android:layout_height="wrap_content"
-        android:text="你"
         android:textSize="90sp"
+
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/timer"
         android:layout_toEndOf="@+id/timer" />
     <TextView
         android:id="@+id/words2"
-        android:layout_width="wrap_content"
+        android:layout_width="90sp"
         android:layout_height="wrap_content"
-        android:text="好"
+
         android:textSize="90sp"
         android:layout_below="@+id/grammar2"
         android:layout_alignBaseline="@+id/words1"
@@ -41,9 +41,9 @@
         android:layout_toEndOf="@+id/words1" />
     <TextView
         android:id="@+id/words3"
-        android:layout_width="wrap_content"
+        android:layout_width="90sp"
         android:layout_height="wrap_content"
-        android:text="漂"
+
         android:textSize="90sp"
         android:layout_alignBaseline="@+id/words2"
         android:layout_alignBottom="@+id/words2"
@@ -51,9 +51,8 @@
         android:layout_toEndOf="@+id/words2" />
     <TextView
         android:id="@+id/words4"
-        android:layout_width="wrap_content"
+        android:layout_width="90sp"
         android:layout_height="wrap_content"
-        android:text="亮"
         android:textSize="90sp"
         android:layout_alignBaseline="@+id/words3"
         android:layout_alignBottom="@+id/words3"
@@ -68,7 +67,7 @@
         android:layout_alignStart="@+id/words1"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="ni"
+
         android:layout_alignRight="@+id/words1"
         android:layout_alignEnd="@+id/words1" />
 
@@ -81,7 +80,7 @@
         android:layout_toEndOf="@+id/grammar1"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="hao"
+
         android:layout_alignRight="@+id/words2"
         android:layout_alignEnd="@+id/words2" />
     <TextView
@@ -93,7 +92,7 @@
         android:layout_toEndOf="@+id/grammar2"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="piao"
+
         android:layout_alignRight="@+id/words3"
         android:layout_alignEnd="@+id/words3" />
     <TextView
@@ -105,7 +104,7 @@
         android:layout_toEndOf="@+id/grammar3"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="shuǐ"
+
         android:layout_alignRight="@+id/words4"
         android:layout_alignEnd="@+id/words4" />
     <Button

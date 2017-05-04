@@ -27,8 +27,11 @@
         <activity
             android:name=".ExamActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".SetupActivity"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".SetupActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".TestDailActivity"
+            android:screenOrientation="landscape"/>
     </application>
-
 </manifest>

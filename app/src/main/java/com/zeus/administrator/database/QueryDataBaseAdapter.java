@@ -96,7 +96,7 @@ public class QueryDataBaseAdapter {
         Cursor cursor = sdb.rawQuery( sql,null);
         HashMap<String, Object> map = new HashMap<String, Object>();
         listData = new ArrayList<HashMap<String, Object>>();
-        if(cursor.moveToFirst()==true){
+        while ( cursor.moveToNext()) {
             map = new HashMap<String, Object>();
             map.put("word", cursor.getString(0));
             map.put("grammar", cursor.getString(1) ) ;

@@ -409,7 +409,7 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
 
             clevel = listData.get(position).get("level").toString().trim();
             stars = listData.get(position).get("stars").toString().trim();
-            if( clevel.equals("!@#$") == true){
+            if( clevel.equals("!@#$") ){
                 //观察convertView随ListView滚动情况
                 if (convertView == null) {
                     convertView = mInflater.inflate(R.layout.mlist, null);
