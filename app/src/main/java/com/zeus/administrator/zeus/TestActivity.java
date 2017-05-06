@@ -115,7 +115,7 @@ public class TestActivity extends AppCompatActivity {
         }else
             totProb = ((float) sucCont/(float) totNum)*100;
 
-        Toast.makeText(TestActivity.this,"成功数"+sucCont+" 总时间"+totTime+" 总笔数"+totNum, Toast.LENGTH_LONG).show();
+    //    Toast.makeText(TestActivity.this,"成功数"+sucCont+" 总时间"+totTime+" 总笔数"+totNum, Toast.LENGTH_LONG).show();
 
         Intent intent=new Intent();
         intent.setClass(getApplicationContext(), TestDailActivity.class);
@@ -142,6 +142,7 @@ public class TestActivity extends AppCompatActivity {
         gram3 = (TextView)findViewById(R.id.grammar3);
         gram4 = (TextView)findViewById(R.id.grammar4);
     }
+
     private void getwords(int position){
         String[] word;
         String[] grama;
