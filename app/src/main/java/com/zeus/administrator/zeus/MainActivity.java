@@ -246,7 +246,15 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
         getMenuInflater().inflate( R.menu.menu_init, menu);
         return true;
     }
-
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) { //resultCode为回传的标记，我在B中回传的是RESULT_OK
+            case RESULT_OK:
+                initListview();
+                break;
+            default:
+                break;
+        }
+    }
     public void onArticleSelected(int position) {
         // 用户选择了HeadlinesFragment中的头标题后
         final Intent intent=new Intent();;

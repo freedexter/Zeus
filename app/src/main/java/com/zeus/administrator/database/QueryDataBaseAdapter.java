@@ -45,7 +45,7 @@ public class QueryDataBaseAdapter {
             sdb=dbHelper.getWritableDatabase();
         }
         String sql;
-        sql="select * from  user_exam_dtl  where username=\'"+username+"\' order by trantime desc";
+        sql="select * from  user_exam_dtl  where username=\'"+username+"\' order by trantime desc limit 50";
 
         Log.v("tag",sql);
         Cursor c = sdb.rawQuery( sql,null);
@@ -143,6 +143,31 @@ public class QueryDataBaseAdapter {
         cursor.close();
         sdb.close();
         return time;
+    }
+    public boolean insertExamdtl (String username, ArrayList<HashMap<String, Object>> listData ){
+        boolean ret = true;
+        String trantime,level,score,stars,usedtime;
+        Object[] arrayOfObject = new Object[6];
+
+        trantime = listData.get(0).get("trantime").toString();
+        level = listData.get(0).get("level").toString();
+        score = listData.get(0).get("score").toString();
+        stars = listData.get(0).get("stars").toString();
+        usedtime = listData.get(0).get("usedtime").toString();
+
+        sdb = dbHelper.getWritableDatabase();
+        arrayOfObject[0] = username ;
+        arrayOfObject[1] = trantime ;
+        arrayOfObject[2] = level ;
+        arrayOfObject[3] = score;
+        arrayOfObject[4] = stars;
+        arrayOfObject[5] = usedtime;
+
+
+        sdb.execSQL("Insert into user_exam_dtl values( ?,?,?,?,?,? )", arrayOfObject );
+
+        sdb.close();
+        return ret;
     }
 /*
     public boolean insertCustomOrder(String username, ArrayList<HashMap<String, Object>> listData ){

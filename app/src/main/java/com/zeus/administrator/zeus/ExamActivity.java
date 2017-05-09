@@ -28,13 +28,14 @@ public class ExamActivity extends AppCompatActivity {
     String[] flag;
     private Button know,unknow,end;
     private String words_totcount,level,username,limt_time;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
         setTextView();
 
-        Intent intent = new Intent();
+        intent = new Intent();
         intent = this.getIntent();
         Bundle b = intent.getExtras();
         level = b.getString("level").trim();
@@ -97,7 +98,7 @@ public class ExamActivity extends AppCompatActivity {
     private void finshTest(){
         int sucCont=0;
         String hour,min,sec;
-        float totProb;
+        int totProb;
         long lasttime=0,usedtime=0;
         int totNum=0;
         int i;
@@ -118,11 +119,11 @@ public class ExamActivity extends AppCompatActivity {
         if( totNum == 0 ){
             totProb = 0;
         }else
-            totProb = ((float) sucCont/(float) totNum)*100;
+            totProb =  (int)(( (float)sucCont /(float) totNum )*100);
 
-        //    Toast.makeText(TestActivity.this,"成功数"+sucCont+" 总时间"+totTime+" 总笔数"+totNum, Toast.LENGTH_LONG).show();
+         //  Toast.makeText(ExamActivity.this,"得分"+totProb+" 总时间"+usedtime+" 总笔数"+totNum, Toast.LENGTH_LONG).show();
 
-        Intent intent=new Intent();
+       // Intent intent=new Intent();
         intent.setClass(getApplicationContext(), ExamDailActivity.class);
         Bundle b = new Bundle();
         b.putString("username",username);
@@ -130,10 +131,12 @@ public class ExamActivity extends AppCompatActivity {
         b.putString("totnum",totNum+"");
         b.putString("usedtime",(usedtime/1000)+"");
         b.putString("totsucc",sucCont+"");
-        b.putFloat("totprob",totProb);
+        b.putInt("totprob",totProb);
         intent.putExtras(b);
 
+
         startActivity(intent);
+        setResult(RESULT_OK, intent);
         finish();
 
     }
