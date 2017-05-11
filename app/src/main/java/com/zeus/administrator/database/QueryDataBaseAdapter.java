@@ -83,7 +83,35 @@ public class QueryDataBaseAdapter {
         return listData;
     }
 
+    public ArrayList<String>  getUser(  ){
+        ArrayList<String> listData;
+        if( !sdb.isOpen() ){
+            sdb=dbHelper.getWritableDatabase();
+        }
+        String sql;
+        sql="select username from  user where username <> 'admin'";
 
+        Log.v("tag",sql);
+        Cursor c = sdb.rawQuery( sql,null);
+
+        int count = c.getCount();
+        Log.v("tag",String.valueOf(count));
+
+        listData = new ArrayList<String>();
+        if( count == 0 ){
+            listData.add("");
+        }else {
+            // 获取表的内容
+            // c.moveToFirst();
+            listData.add("");
+            while ( c.moveToNext()) {
+                listData.add(c.getString(0));
+            }
+        }
+        c.close();
+        sdb.close();
+        return listData;
+    }
     public ArrayList<HashMap<String, Object>>  getWordDict( String level,String count  ){
         if( !sdb.isOpen() ){
             sdb=dbHelper.getWritableDatabase();
@@ -155,7 +183,9 @@ public class QueryDataBaseAdapter {
         stars = listData.get(0).get("stars").toString();
         usedtime = listData.get(0).get("usedtime").toString();
 
-        sdb = dbHelper.getWritableDatabase();
+        if( !sdb.isOpen() ){
+            sdb=dbHelper.getWritableDatabase();
+        }
         arrayOfObject[0] = username ;
         arrayOfObject[1] = trantime ;
         arrayOfObject[2] = level ;
@@ -168,6 +198,21 @@ public class QueryDataBaseAdapter {
 
         sdb.close();
         return ret;
+    }
+
+    public boolean updateUserPwd( String username, String pwd ){
+        Integer ret = 0;
+        String sql;
+
+        if( !sdb.isOpen() ){
+            sdb=dbHelper.getWritableDatabase();
+        }
+        sql = "update user set password='"+pwd+"'where username ='"+username+"'";
+        Log.v("tag", sql);
+        sdb.execSQL(sql);
+        sdb.close();
+        // Log.v("tag", sql);
+        return true;
     }
 /*
     public boolean insertCustomOrder(String username, ArrayList<HashMap<String, Object>> listData ){

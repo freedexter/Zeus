@@ -23,19 +23,36 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".TestActivity"
+            android:label="练习"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ExamActivity"
+            android:label="测验"
             android:screenOrientation="landscape" />
         <activity
             android:name=".SetupActivity"
-            android:screenOrientation="landscape" />
+            android:label="设置"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".TestDailActivity"
+            android:label="练习"
             android:screenOrientation="landscape" />
         <activity
             android:name=".ExamDailActivity"
-            android:screenOrientation="landscape" ></activity>
+            android:label="测验"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".ChgPwdActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".SetParaActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ImportDtlActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

@@ -35,13 +35,12 @@ public class LoginDataBaseAdapter{
         if( !sdb.isOpen() ){
             sdb=dbHelper.getWritableDatabase();
         }
-        sdb.beginTransaction();
+
         String sql="select * from user where username=?";
         Cursor cursor=sdb.rawQuery(sql, new String[]{username});
         if(cursor.moveToFirst()==true){
             if( password.equals(cursor.getString(cursor.getColumnIndex("password"))) == false ){
                 cursor.close();
-                sdb.endTransaction();
                 sdb.close();
                 ret = "False";
                 return ret;
@@ -58,7 +57,6 @@ public class LoginDataBaseAdapter{
         }
         Log.v("tag", username+ret);
         cursor.close();
-        sdb.endTransaction();
         sdb.close();
         return ret;
     }
@@ -68,7 +66,7 @@ public class LoginDataBaseAdapter{
         if( !sdb.isOpen() ){
             sdb=dbHelper.getWritableDatabase();
         }
-        sdb.beginTransaction();
+
         String sql="select * from user where substr(stat,2,2)='1'";
         Cursor cursor=sdb.rawQuery(sql, null);
         if(cursor.moveToFirst()==true){
@@ -76,7 +74,6 @@ public class LoginDataBaseAdapter{
         }
 
         cursor.close();
-        sdb.endTransaction();
         sdb.close();
         return username;
     }
@@ -90,7 +87,7 @@ public class LoginDataBaseAdapter{
         if( !sdb.isOpen() ){
             sdb=dbHelper.getWritableDatabase();
         }
-        sdb.beginTransaction();
+
         sql="select * from user where username = '"+username+"'";
         cursor=sdb.rawQuery(sql, null);
         if(cursor.moveToFirst()==true){
@@ -99,16 +96,15 @@ public class LoginDataBaseAdapter{
         string1 = stat.substring( 0,1) + "1";
        // Log.v("tag",stat);
        // Log.v("tag",string1);
-        sdb.endTransaction();
-        sdb.beginTransaction();
+
         sql="update user set stat='"+string1+"' where username ='"+username+"'";
         sdb.execSQL(sql);
         string2 = stat.substring( 0,1) + "0";
         sql="update user set stat='"+string2+"' where username <>'"+username+"'";
         sdb.execSQL(sql);
-        sdb.setTransactionSuccessful();
+
         cursor.close();
-        sdb.endTransaction();
+
         sdb.close();
         return username;
     }
@@ -123,7 +119,7 @@ public class LoginDataBaseAdapter{
         if( !sdb.isOpen() ){
             sdb=dbHelper.getWritableDatabase();
         }
-        sdb.beginTransaction();
+
         sql="select * from user where username = '"+username+"'";
         cursor=sdb.rawQuery(sql, null);
         if(cursor.moveToFirst()==true){
@@ -132,13 +128,12 @@ public class LoginDataBaseAdapter{
         string1 = stat.substring( 0,1) + "0";
       //  Log.v("tag",stat);
        // Log.v("tag",string1);
-        sdb.endTransaction();
-        sdb.beginTransaction();
+
         sql="update user set stat='"+string1+"' where username ='"+username+"'";
         sdb.execSQL(sql);
-        sdb.setTransactionSuccessful();
+
         cursor.close();
-        sdb.endTransaction();
+
         sdb.close();
         return username;
     }
@@ -148,13 +143,10 @@ public class LoginDataBaseAdapter{
         if( !sdb.isOpen() ){
             sdb=dbHelper.getWritableDatabase();
         }
-        sdb.beginTransaction();
+
         String sql="insert into user(username,password,stat) values(?,?,?)";
         Object obj[]={user.getUsername(),user.getPassword(),user.getStat()};
         sdb.execSQL(sql, obj);
-        sdb.setTransactionSuccessful();
-        sdb.endTransaction();
-        sdb.close();
         return true;
     }
 

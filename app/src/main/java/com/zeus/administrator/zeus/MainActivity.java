@@ -237,7 +237,12 @@ public class MainActivity extends AppCompatActivity implements MenuListFragment.
         if (id == R.id.action_settings) {
             System.exit(0);
         }
-
+        if (id == R.id.loginout) {
+            finish();
+            Intent i=new Intent();
+            i.setClass(getApplicationContext(), LoginActivity.class);
+            startActivity(i);
+        }
         return super.onOptionsItemSelected(item);
     }
     @Override
