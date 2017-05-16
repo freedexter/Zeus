@@ -214,6 +214,20 @@ public class QueryDataBaseAdapter {
         // Log.v("tag", sql);
         return true;
     }
+    public boolean updateSysParm( String time , String count ){
+        Integer ret = 0;
+        String sql;
+
+        if( !sdb.isOpen() ){
+            sdb=dbHelper.getWritableDatabase();
+        }
+        sql = "update system_setting set limit_time='"+time+"' , words_totcount ='"+count+"'";
+        Log.v("tag", sql);
+        sdb.execSQL(sql);
+        sdb.close();
+        // Log.v("tag", sql);
+        return true;
+    }
 /*
     public boolean insertCustomOrder(String username, ArrayList<HashMap<String, Object>> listData ){
         boolean ret = true;
