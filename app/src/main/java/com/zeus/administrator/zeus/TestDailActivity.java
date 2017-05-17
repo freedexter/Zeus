@@ -62,7 +62,7 @@ public class TestDailActivity extends AppCompatActivity {
         vtotnum.setText(totnum);
         vtotsucc.setText(totsucc);
         vtottime.setText(tottime);
-        vtotprob.setText(totprob+"%");
+        vtotprob.setText(String.format("%.1f",totprob)+"%");
         if( totprob ==0  )
             vcomment.setText("哎呀！没有成绩！");
         if( totprob >0 &&totprob < 60 )
